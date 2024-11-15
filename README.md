@@ -52,9 +52,9 @@ SCRIPT/
     └── db_config.cnf.ini   # Configuration base de données
 ```
 
-1. **Exécution du script d'anonymisation**
-   
-Ce script permet d'anonymiser des données sensibles en utilisant des dictionnaires de noms et prénoms.
+1. **Exécution du script d'anonymisation :**
+
+- Ce script permet d'anonymiser des données sensibles en utilisant des dictionnaires de noms et prénoms.
 ```bash
 python StartSolution/IDUPPA.py
 ```
