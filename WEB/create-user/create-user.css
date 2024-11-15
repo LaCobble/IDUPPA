@@ -1,0 +1,31 @@
+body {
+  background-color: #f8f9fa;
+  font-family: 'Lato', sans-serif;
+}
+.container {
+  max-width: 600px;
+  margin-top: 50px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+.form-control, .btn-primary {
+  height: calc(2.5em + .75rem + 2px);
+  font-size: 1rem;
+  border-radius: .3rem;
+}
+.btn-primary {
+  background-color: #5A67D8;
+  border: none;
+}
+#success_message {
+  display: none;
+}
+
+#success_message{ display: none;}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: #6A0DAD !important; /* Un violet foncé */
+}

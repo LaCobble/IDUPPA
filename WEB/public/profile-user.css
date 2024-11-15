@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.panel {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+#profile-image1 {
+    width: 120px;
+    height: 120px;
+    border: 3px solid #03b1ce;
+    margin-top: 15px;
+}
+
+.user-info {
+    margin-top: 15px;
+}
+
+.user-name {
+    color: #00b1b1;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.user-role {
+    color: #777;
+    font-size: 1.1em;
+}
+
+.divider {
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 1.1em;
+}
+
+.title {
+    font-weight: bold;
+    color: #555;
+}
+
+.info {
+    color: #333;
+}
+
+.bot-border {
+    border-bottom: 1px solid #f8f8f8;
+    margin: 5px 0;
+}
+
+.admin-btn {
+    background-color: #337ab7; /* Couleur de base */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    }
+
+.admin-btn:hover {
+    background-color: #285e8e; /* Couleur au survol */
+    text-decoration: none;
+    }

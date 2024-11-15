@@ -1,0 +1,38 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+:root {
+  --primary: #94618e;
+}
+
+.justify {
+  text-align: justify;
+}
+
+.text-purple {
+  color: var(--primary);
+}
+
+.bg-purple {
+  background-color: var(--primary);
+  color: white;
+}
+
+header {
+  background-color: #6f42c1; /* Couleur pour le fond de l'en-tête (violet) */
+  color: white; /* Couleur du texte */
+}
+
+nav .nav-link {
+  margin-right: 15px; /* Espacement entre les liens de navigation */
+  font-weight: bold; /* Rendre les liens en gras */
+}
+
+nav .nav-link:hover {
+  color: #f0f0f0; /* Couleur de survol des liens */
+}
+
+.user-info {
+  font-size: 16px; /* Taille de la police pour les informations de l'utilisateur */
+}

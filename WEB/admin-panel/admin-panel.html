@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  <!-- Bootstrap Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./Admin-Panel.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav bg-purple justify-content-center">
+    <a class="nav-link text-white" href="/logout" id="logoutLink">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+  </nav>
+
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-12 p-5">
+        <h1> <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</h1>
+        <hr />
+      </div>
+    </div>
+
+    <div class="row">
+
+      <!-- Profile User -->
+      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 p-2">
+        <!-- redirige vers le endpoint /profile-user -->
+        <a class="text-decoration-none" href="/profile-user">
+          <div class="card p-3 shadow bg-purple text-center border-0">
+            <div class="card-body">
+              <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+              <hr />
+              <p class="card-title lead">Profile User</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Create User -->
+      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 p-2">
+        <a class="text-decoration-none" href="/create-user">
+          <div class="card p-3 shadow bg-purple text-center border-0">
+            <div class="card-body">
+              <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
+              <hr />
+              <p class="card-title lead">Create User</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Modify User Work in Progress -->
+      <!-- <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 p-2">
+        <a class="text-decoration-none" href="#">
+          <div class="card p-3 shadow bg-purple text-center border-0">
+            <div class="card-body">
+              <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
+              <hr />
+              <p class="card-title lead">Modify User</p>
+            </div>
+          </div>
+        </a>
+      </div> -->
+
+      <!-- View Users -->
+      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 p-2">
+        <a class="text-decoration-none" href="/users-table">
+          <div class="card p-3 shadow bg-purple text-center border-0">
+            <div class="card-body">
+              <i class="fa fa-users fa-2x" aria-hidden="true"></i>
+              <hr />
+              <p class="card-title lead">View Users</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Work in Progress -->
+      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 p-2">
+        <a class="text-decoration-none" href="#">
+          <div class="card p-3 shadow bg-purple text-center border-0">
+            <div class="card-body">
+              <i class="fa fa-cogs fa-2x" aria-hidden="true"></i>
+              <hr />
+              <p class="card-title lead">...</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    document.getElementById('logoutLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      fetch('/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          window.location.href = '/login';
+        }
+      }).catch(error => {
+        console.error('Erreur de déconnexion:', error);
+      });
+    });
+  </script>
+</body>
+</html>

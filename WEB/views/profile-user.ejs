@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile User</title>
+  <link rel="stylesheet" href="/profile-user.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="row" style="margin-top: 40px;">
+       <div class="col-md-7 col-md-offset-2">
+         <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="box box-info">
+                <div class="box-body">
+                  <div class="col-sm-6 text-center">
+                      <img alt="User Pic" src="/avatar.png" id="profile-image1" class="img-circle img-responsive">
+                  </div>
+                  <div class="col-sm-6 text-left user-info">
+                      <h4 class="user-name"><%= user.last_name %> <%= user.first_name %></h4>
+                      <p class="user-role"><%= user.profession %></p>
+                  </div>
+                  <div class="clearfix"></div>
+                  <hr class="divider">
+
+                  <div class="info-row"><span class="title">Prénom:</span><span class="info"><%= user.first_name %></span></div>
+                  <div class="info-row"><span class="title">Nom de famille:</span><span class="info"><%= user.last_name %></span></div>
+                  <div class="info-row"><span class="title">Username:</span><span class="info"><%= user.username %></span></div>
+                  <div class="info-row"><span class="title">Email:</span><span class="info"><%= user.email %></span></div>
+                  <div class="info-row"><span class="title">Ville:</span><span class="info"><%= user.city %></span></div>
+                  <div class="info-row"><span class="title">Date de création:</span><span class="info"><%= user.created_at %></span></div>
+                  <div class="info-row"><span class="title">Date de naissance:</span><span class="info"><%= user.date_of_birth %></span></div>
+                  <div class="info-row"><span class="title">Pays:</span><span class="info"><%= user.country %></span></div>
+                  <div class="info-row"><span class="title">Sexe:</span><span class="info"><%= user.sexe %></span></div>
+                  
+                  <!-- Bouton d'accès à la page Admin -->
+                  <% if (user.data_access_level === 1 || user.data_access_level === 2) { %>
+                    <div class="text-center" style="margin-top: 20px;">
+                      <a href="/admin-panel" class="btn btn-primary admin-btn">Admin Panel</a>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+         </div>
+       </div>
+       <div class="text-center" style="margin-top: 20px;">
+        <a href="/logout" class="btn btn-danger">Logout</a>
+      </div>    
+	</div>
+</div>
+</body>
+</html>
