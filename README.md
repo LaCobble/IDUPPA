@@ -13,14 +13,13 @@
 git clone https://github.com/IDUPPA/IDUPPA.git
 cd IDUPPA
 ```
-1. **Installation des dépendances Node.js**
+2. **Installation des dépendances Node.js**
 ```bash
 cd WEB
 npm ci
 npm audit
 ```
-
-1. **Installation des dépendances Python**
+3. **Installation des dépendances Python**
 ```bash
 cd ../SCRIPT
 # Installer les dépendances depuis requirements.txt
@@ -29,7 +28,7 @@ pip install -r requirements.txt
 pip-audit
 ```
 
-5. **Configuration de la base de données**
+4. **Configuration de la base de données**
 Pour commencer, il faut créer la base de données de départ avec le script `createDB.sql`, puis on crée les bases de données de la solution avec le script `createDBs.sql`, puis on initialise les données de test avec le script `createDATA.sql`
 
 ## 📜 Scripts et Outils
@@ -54,6 +53,7 @@ SCRIPT/
 ```
 
 1. **Exécution du script d'anonymisation**
+   
 Ce script permet d'anonymiser des données sensibles en utilisant des dictionnaires de noms et prénoms.
 ```bash
 python StartSolution/IDUPPA.py
