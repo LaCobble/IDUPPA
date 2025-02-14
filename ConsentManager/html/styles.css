@@ -1,0 +1,28 @@
+.button-23 {
+    background-color: #FFFFFF;
+    border: 1px solid #222222;
+    border-radius: 8px;
+    padding: 13px 23px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.button-23:hover {
+    background-color: #F7F7F7;
+}
+
+.button-23:active {
+    transform: scale(0.96);
+}
+
+.button-23:focus-visible {
+    box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+}
+
+.button-23:disabled {
+    border-color: #DDDDDD;
+    color: #DDDDDD;
+    cursor: not-allowed;
+}

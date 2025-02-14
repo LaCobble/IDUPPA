@@ -1,0 +1,5 @@
+keycloak.auth-server-url=http://localhost:8080/auth
+keycloak.realm=PRIAM
+keycloak.resource=TeaStore-Client
+keycloak.public-client=true
+keycloak.bearer-only=true
