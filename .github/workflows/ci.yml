@@ -1,0 +1,82 @@
+# Lightweight checks on every PR, on Linux.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Repository checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Required files
+        run: |
+          for f in README.md LICENSE CHANGELOG.md SECURITY.md CONTRIBUTING.md CODE_OF_CONDUCT.md; do
+            test -f "$f" || { echo "::error file=$f::$f is missing"; exit 1; }
+          done
+
+      - name: Secrets (gitleaks)
+        run: |
+          docker run --rm -v "$PWD:/repo" ghcr.io/gitleaks/gitleaks:v8.21.2 \
+            dir /repo --no-banner --redact
+
+  web:
+    name: WEB (Node admin panel)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: WEB
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: WEB/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: JavaScript syntax
+        run: git ls-files '*.js' | xargs -r -n1 node --check
+
+  consent-manager:
+    name: ConsentManager (Node microservice)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # No package.json is committed for this service, so only the syntax is checked.
+      - name: JavaScript syntax
+        run: git ls-files 'ConsentManager/*.js' | xargs -r -n1 node --check
+
+  script:
+    name: SCRIPT (Python anonymisation)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: SCRIPT/requirements.txt
+      - name: Install dependencies
+        run: pip install -r SCRIPT/requirements.txt
+      - name: Byte-compile Python sources
+        # The Selenium tests under ConsentManager/tests need a running stack, so they are only compiled.
+        run: git ls-files '*.py' | tr '\n' '\0' | xargs -0 python -m py_compile
