@@ -10,8 +10,22 @@ updates:
     schedule:
       interval: monthly
     labels: [dependencies]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      mineures-et-correctifs:
+        patterns: ["*"]
+        update-types: [minor, patch]
   - package-ecosystem: pip
     directory: /SCRIPT
     schedule:
       interval: monthly
     labels: [dependencies]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      mineures-et-correctifs:
+        patterns: ["*"]
+        update-types: [minor, patch]
