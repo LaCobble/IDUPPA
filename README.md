@@ -17,17 +17,33 @@ IDUPPA separates identifying data from the rest of a client database and exposes
 
 | Part | Stack | Role |
 | --- | --- | --- |
-| [`SCRIPT/`](SCRIPT) | Python, SQLAlchemy, MySQL | SQL scripts that create the client database and the solution databases (users, pseudonymisation, anonymisation, logs, GDPR metadata, access control), and `IDUPPA.py`, which replaces each user's identity with a name drawn from French surname/first-name dictionaries and creates time-limited dynamic access-control entries. |
+| [`SCRIPT/`](SCRIPT) | Python, SQLAlchemy, MySQL | SQL scripts that create the client database and the solution databases (users, pseudonymisation, anonymisation, logs, GDPR metadata, access control), and `IDUPPA.py`, which replaces each user's identity with a name drawn from a first-name dictionary and a list of fictitious surnames, and creates time-limited dynamic access-control entries. |
 | [`WEB/`](WEB) | Node.js, Express, EJS, MySQL | Admin panel: login, create users, browse the users table, user profile and access logs. |
 | [`ConsentManager/`](ConsentManager) | Node.js, Express, MySQL, Eureka | Microservice used to integrate the PRIAM privacy-rights platform with the TeaStore demo shop: data-access, rectification and erasure (right to be forgotten) endpoints, plus Selenium UI tests. See its [README](ConsentManager/README.md). |
 
 [`Questionnaire.md`](Questionnaire.md) is the (French) user evaluation questionnaire written for PRIAM, with one anonymised answer.
 
-## Screenshot
+## Screenshots
 
-<img src="docs/images/login.webp" alt="Admin panel login page" width="600">
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/login.webp" alt="Admin panel login"><br><sub>Admin panel login</sub></td>
+    <td width="50%"><img src="docs/images/admin-panel.webp" alt="Admin dashboard"><br><sub>Admin dashboard</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/images/create-user.webp" alt="Create a user"><br><sub>Create a user</sub></td>
+    <td width="50%"><img src="docs/images/profile.webp" alt="User profile"><br><sub>User profile</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/images/users-table.webp" alt="Users table, DevOps role (pseudonymised access level)"><br><sub>Users table, DevOps role (pseudonymised access level)</sub></td>
+    <td width="50%"><img src="docs/images/users-table-anon.webp" alt="Same table for a Developer role: only anonymised data is returned"><br><sub>Same table for a Developer role: only anonymised data is returned</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/images/consent-button.webp" alt=""Privacy Rights" button added to TeaStore (ConsentManager)"><br><sub>"Privacy Rights" button added to TeaStore (ConsentManager)</sub></td>
+  </tr>
+</table>
 
-<sub>Admin panel login page, rendered locally from `WEB/public/login.html` (October 2026). The other screens need a populated MySQL database.</sub>
+<sub>Captured with headless Chrome (October 2026) from a local run of `WEB/` on a throwaway MySQL database built with the repository's SQL scripts and their fictitious test users; the consent button is `ConsentManager/html/button.html`. The interface is in French.</sub>
 
 ## Prerequisites
 
@@ -70,7 +86,7 @@ The CI installs the dependencies, checks the JavaScript syntax of `WEB/` and `Co
 ```
 IDUPPA/
 ├── SCRIPT/
-│   ├── DATA/                 # surname and first-name dictionaries used for pseudonymisation
+│   ├── DATA/                 # first-name dictionary and fictitious surnames used for pseudonymisation
 │   ├── StartClient/          # client database schema
 │   ├── StartSolution/        # solution schemas, test data, IDUPPA.py
 │   └── requirements.txt
@@ -89,6 +105,11 @@ IDUPPA/
 ## Known limitations
 
 This is a school prototype, not production software: the admin panel compares passwords in plain text, the pseudonymisation draws random names without guaranteeing uniqueness, and `ConsentManager` has no committed `package.json`.
+
+Verified in October 2026 against a fresh MySQL 9 database:
+
+- `createDBs.sql` inserts a row referencing user 1 before `createDATA.sql` creates the users, so the first run stops at that insert; running `createDBs.sql` again with `mysql --force` after `createDATA.sql` completes the setup.
+- `StartSolution/IDUPPA.py` does not run as committed: `Date` is missing from the SQLAlchemy import, and the model maps a `sex` column while the schema defines `sexe`. It also needs SQLAlchemy 2.0.18 on Python 3.11 or 3.12 (that version does not import on Python 3.14).
 
 ## Context
 
