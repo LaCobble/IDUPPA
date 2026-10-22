@@ -1,7 +1,7 @@
 {
   "name": "IDUPPA",
   "version": "1.0.0",
-  "description": "Votre description ici",
+  "description": "IDUPPA web admin panel: users, pseudonymised data and access logs",
   "main": "server.js",
   "dependencies": {
     "cookie-parser": "^1.4.7",
@@ -15,5 +15,5 @@
     "dev": "nodemon server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }
